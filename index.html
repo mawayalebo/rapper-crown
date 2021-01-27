@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="/materialize/materialize.css">
+    <script src="/materialize/materialize.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>Rapper Crown</title>
+</head>
+<body>
+    <div class="nav-wrapper">
+        <nav>
+            <div class="container">
+                <a href="" class="brand-logo">rapper crown</a>
+                <ul class="right">
+                    <li id="add_rapper"><a class="modal-trigger signed_in" data-target="add_modal">Add Raper</a></li>
+                    <li><a class="modal-trigger not_signed_in" data-target="sign_up_modal">Sign up</a></li>
+                    <li><a class="modal-trigger not_signed_in" data-target="sign_in_modal">Sign in</a></li>
+                    <li><a class="signed_in"id="sign_out">Sign out</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="modal" id="sign_up_modal">
+        <div class="container">
+            <form method="POST" id="sign_up_form">
+                <br>
+                <h3>Sign up</h3>
+                <br>
+                <div class="input-field">
+                    <input type="email" name="sign_up_email" id="sign_up_email" required>
+                    <label for="sign_up_email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" name="sign_up_password" id="sign_up_password" required>
+                    <label for="sign_up_password">Password</label>
+                </div>
+                <button  type="submit" class="btn waves-effect waves-lighten btn-medium right modal-close">Sign up</button>
+                <br>
+                <a href="" data-target="sign_in_modal" class="center modal-trigger modal-close">already have an account?</a>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="sign_in_modal">
+        <div class="container">
+            <form id="sign_in_form">
+                <br>
+                <h3>Sign In</h3>
+                <br>
+                <div class="input-field">
+                    <input type="email" name="sign_in_email" id="sign_in_email" required>
+                    <label for="sign_up_email">Email</label>
+                </div>
+                <div class="input-field">
+                    <input type="password" name="sign_in_password" id="sign_in_password" required>
+                    <label for="sign_in_password">Password</label>
+                </div>
+                <button type="submit" class="btn waves-effect waves-lighten btn-medium right modal-close">Sign in</button>
+                <br>
+                <a  href=""data-target="sign_up_modal" class="center modal-trigger modal-close">new to Rapper Crown?</a>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+    <div class="modal" id="add_modal">
+        <div class="container">
+            <form id="add_rapper_form">
+                <br>
+                <h3>Add Rapper</h3>
+                <br>
+                <div class="input-field">
+                    <input type="text" name="rapper_name" id="rapper_name" required>
+                    <label for="rapper_name">Name</label>
+                </div>
+                <div class="input-field countryContainer">
+                    <select  id="countries" name="countries" class="browser-default">
+                        <option  class="grey-text"value=""disabled selected>select rapper's country</option>
+                    </select>
+                </div>
+                <div class="input-field">
+                    <textarea  class="materialize-textarea"name="description" id="description" cols="30" rows="10"></textarea>
+                    <label for="description">Description</label>
+                </div>
+                <button type="submit" class="btn waves-effect waves-lighten btn-medium right ">Add Rapper</button>
+                <br>
+                <br>
+            </form>
+        </div>
+    </div>
+    <div class="container center">
+        <h4>Rappers</h4>
+        <div class="row" id="rapperList">
+
+        </div>
+    </div>
+</body>
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyBVHoMvNVXKSM400xVcMp1nQZfUsaSAXls",
+      authDomain: "rapper-crown.firebaseapp.com",
+      projectId: "rapper-crown",
+      storageBucket: "rapper-crown.appspot.com",
+      messagingSenderId: "40689467598",
+      appId: "1:40689467598:web:c5d05904c3906a9bc9d09f",
+      measurementId: "G-YHPH497SWM"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    
+    const dataBase = firebase.firestore();
+    dataBase.settings({timeStampsInSnapshots: true});
+    const auth = firebase.auth();
+  </script>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function(){
+        console.log('ready');
+        M.AutoInit();
+    });
+</script>
+<script src="/index.js"></script>
+</html>
